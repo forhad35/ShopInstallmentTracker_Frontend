@@ -72,7 +72,7 @@
     const API_BASE = 'https://shopinstallmenttracker.onrender.com'; // Change to your FastAPI base URL
 
     function fetchChartData(endpoint, chartId, label) {
-      fetch(`${API_BASE}/admin/${endpoint}`)
+      fetch(`${API_BASE}/admin/${endpoint}`,{mode: 'cors'})
         .then(res => res.json())
         .then(data => {
           const labels = data.map(d => d.date);
@@ -96,7 +96,7 @@
     }
     function downloadReport(type, category) {
     const url = `${API_BASE}/admin/report/${type}/${category}`;
-    fetch(url)
+    fetch(url, { mode: 'cors' })
         .then(response => {
             if (!response.ok) throw new Error("Download failed");
             return response.blob();
@@ -119,7 +119,7 @@
 }
 
     function loadTableData() {
-      fetch(`${API_BASE}/admin/users-with-payments`)
+      fetch(`${API_BASE}/admin/users-with-payments`, {mode: 'cors'})
         .then(res => res.json())
         .then(data => {
           const tbody = document.getElementById('userTableBody');

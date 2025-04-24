@@ -110,6 +110,7 @@
                     product_name: productName,
                     product_price: productPrice,
                 }),
+                mode: "cors",
             });
 
             if (res.ok) {
@@ -122,7 +123,11 @@
             const invoiceLink = document.createElement("a");
             invoiceLink.textContent = "Download Invoice";
             fetch(`http://shopinstallmenttracker.onrender.com/invoice/${user.id}/${purchase_id}`, {
-                method: "GET"
+                method: "GET",
+                mode: "cors",
+                headers: {
+                    "Content-Type": "application/pdf",
+                },
             }).then(response => {
                 if (!response.ok) {
                     message.textContent = "Failed to generate invoice. Check the user ID.";
@@ -149,7 +154,7 @@
         }
 
         async function fetchPurchases() {
-            const res = await fetch(`https://shopinstallmenttracker.onrender.com/users/${user.id}/purchases/`);
+            const res = await fetch(`https://shopinstallmenttracker.onrender.com/users/${user.id}/purchases/`, {mode: "cors"});
             const data = await res.json();
 
             const listDiv = document.getElementById("purchaseList");
@@ -176,6 +181,7 @@
                 headers: {
                     "Content-Type": "application/json",
                 },
+                mode: "cors",
                 body: JSON.stringify({
                     purchase_id: purchaseId,
                     paid_amount: parseFloat(amount),

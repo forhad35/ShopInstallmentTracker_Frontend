@@ -72,7 +72,8 @@
       const res = await fetch(`${backendUrl}/send-otp/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email }),
+        mode: "cors"
       });
 
       const data = await res.json();
@@ -91,7 +92,8 @@
       const res = await fetch(`${backendUrl}/verify-otp/`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ email: currentEmail, otp })
+        body: JSON.stringify({ email: currentEmail, otp }),
+        mode: "cors"
       });
 
       const data = await res.json();

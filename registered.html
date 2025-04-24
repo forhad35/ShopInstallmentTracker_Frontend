@@ -99,7 +99,8 @@
             const res = await fetch(`${backendUrl}/register/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email })
+                body: JSON.stringify({ name, email }),
+                mode: "cors",
             });
 
             const data = await res.json();
